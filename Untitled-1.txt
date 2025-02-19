@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une offre de voyage</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #e0f2f7, #ffffff);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0069d9;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add a Travel Offer</h2>
+        <form id="travelOfferForm" action="#" method="post">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter title" required minlength="3">
+            <div id="titleError" class="error-message"></div>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" placeholder="Enter destination" required minlength="3" pattern="[a-zA-Z\s]+">
+            <div id="destinationError" class="error-message"></div>
+
+            <label for="departure_date">Departure Date:</label>
+            <input type="date" id="departure_date" name="departure_date" required>
+            <div id="departureDateError" class="error-message"></div>
+
+            <label for="return_date">Return Date:</label>
+            <input type="date" id="return_date" name="return_date" required>
+            <div id="returnDateError" class="error-message"></div>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" placeholder="Enter price" required step="any" min="0">
+            <div id="priceError" class="error-message"></div>
+
+            <label for="availability">Availability:</label>
+            <input type="checkbox" id="availability" name="availability">
+
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="adventure">Adventure</option>
+                <option value="family">Family</option>
+                <option value="romantic">Romantic</option>
+                <option value="cultural">Cultural</option>
+            </select>
+
+            <button type="submit">Add Offer</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('travelOfferForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche la soumission du formulaire
+
+            // Réinitialiser les messages d'erreur
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+            const title = document.getElementById("title").value;
+            const destination = document.getElementById("destination").value;
+            const departureDate = document.getElementById("departure_date").value;
+            const returnDate = document.getElementById("return_date").value;
+            const price = document.getElementById("price").value;
+
+            let isValid = true;
+
+            if (title.length < 3) {
+                document.getElementById('titleError').textContent = "The title must contain at least 3 characters.";
+                isValid = false;
+            }
+
+            if (destination.length < 3 || !/^[a-zA-Z\s]+$/.test(destination)) {
+                document.getElementById('destinationError').textContent = "The destination must contain only letters and at least 3 characters.";
+                isValid = false;
+            }
+
+            const departureDateObj = new Date(departureDate);
+            const returnDateObj = new Date(returnDate);
+
+            if (isNaN(departureDateObj) || isNaN(returnDateObj)) {
+                document.getElementById('departureDateError').textContent = "Please select valid dates.";
+                document.getElementById('returnDateError').textContent = "Please select valid dates.";
+                isValid = false;
+            } else if (returnDateObj <= departureDateObj) {
+                document.getElementById('returnDateError').textContent = "Return date must be later than departure date.";
+                isValid = false;
+            }
+
+            if (isNaN(price) || price <= 0) {
+                document.getElementById('priceError').textContent = "The price must be a positive number.";
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Si tout est valide, vous pouvez soumettre le formulaire ici
+                // par exemple: this.submit(); ou envoyer les données via AJAX
+                alert("Formulaire valide !"); // Ceci est un exemple, à remplacer par votre logique
+            }
+        });
+    </script>
+
+</body>
+</html>
