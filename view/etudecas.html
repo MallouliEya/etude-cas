@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Réservation de Voyage</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #8cbfe0;
+            color: white;
+            text-align: center;
+            padding: 2px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #34495e;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #1abc9c;
+        }
+        .hero {
+            background-color: #2980b9;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3em;
+        }
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+        section h2 {
+            color: #6A11CB;
+        }
+
+        /* Section Travel Offers */
+        #traveloffers {
+            background: linear-gradient(135deg, #FFDEE9, #B5FFFC); 
+            padding: 50px 20px;
+            text-align: center;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #traveloffers h2 {
+            font-size: 36px;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        /* Galerie d'offres */
+        .offers-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap; 
+        }
+
+        /* Cartes d'offres */
+        .offer-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 250px;
+            text-align: center;
+        }
+
+        .offer-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 4px solid #FF6B6B;
+        }
+
+        .offer-card h3 {
+            font-size: 20px;
+            color: #34495E;
+            margin-bottom: 10px;
+        }
+
+        .offer-card p {
+            font-size: 14px;
+            color: #666;
+            margin: 0 10px;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .offers-gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .offer-card {
+                width: 90%;
+            }
+        }
+
+        /* Styles pour la section Contact */
+        #contact {
+            background-color: #f0f0f0; /* Couleur de fond légèrement différente */
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-size: 36px;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left; /* Alignement du texte à gauche dans le formulaire */
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Pour que le padding ne modifie pas la largeur totale */
+        }
+
+        .contact-form button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .contact-form button:hover {
+            background-color: #2980b9;
+        }
+        .contact-info {
+            margin-top: 30px; /* Espacement au-dessus des infos de contact */
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h3>Réservez vos Voyages Facilement</h3>
+    </header>
+    <nav>
+        <img src="esprit.png" alt="Logo Esprit" width="100">
+        <a href="#traveloffers">Travel Offers</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="addTravelOffer.html">Dashboard</a>
+    </nav>
+
+    <div class="hero">
+        <h1>Explorez le Monde avec Nous</h1>
+        <p>Réservez vos vacances de rêve dès aujourd'hui</p>
+    </div>
+
+    <section id="traveloffers">
+        <h2> Travel Offers </h2>
+
+        <div class="offers-gallery">
+            <div class="offer-card">
+                <img src="cabin.png" alt="Cabin">
+                <h3>Mountain Escape</h3>
+                <p>Profitez de la nature et du calme des montagnes.</p>
+            </div>
+
+            <div class="offer-card">
+                <img src="circus.png" alt="Circus">
+                <h3>Family Adventure</h3>
+                <p>Des activités pour toute la famille, fun garanti!</p>
+            </div>
+
+            <div class="offer-card">
+                <img src="submarine.png" alt="Submarine">
+                <h3>Underwater Wonders</h3>
+                <p>Explorez les fonds marins comme jamais auparavant.</p>
+            </div>
+        </div>
+
+        <p class="intro-text">Découvrez nos meilleures offres de voyage adaptées à tous vos besoins.</p>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>TRAVEL BOOKING est une application dédiée à simplifier la réservation de vos séjours personnalisés en ligne. Grâce à nos solutions sur mesure, nous vous offrons une expérience fluide, rapide et sans stress, pour que chaque voyage soit une aventure inoubliable.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-form">
+            <form action="mailto:votre_adresse_email@example.com" method="post" enctype="text/plain">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+        <div class="contact-info">
+            <p>Or, you can contact us directly:</p>
+            <p>Email: <a href="mailto:contact@esprit.in">contact@esprit.in</a></p>
+            
+        </div>
+    </section>
+
+    <footer>
+        
+        <p>Address: 1.2 rue André Ampère - 2083<br>
+            Technological Pole - El Ghazala</p>
+        <p>Copyright © Your Website 2024</p>
+    </footer>
+</body>
+</html>
