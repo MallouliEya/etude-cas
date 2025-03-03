@@ -1,9 +1,18 @@
+<?php
+require_once('C:\xampp\htdocs\TravelBookingMVC\Controller\TravelOfferController.php');
+$travelOfferC = new TravelOfferController();
+$list = $travelOfferC->listOffre();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>Liste des Offres de Voyage</title>
     <style>
         body {
@@ -48,6 +57,31 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        .btn {
+            padding: 8px 15px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-update {
+            background-color: #007bff;
+        }
+
+        .btn-update:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 
@@ -59,30 +93,22 @@
         <?php
         require_once 'C:\xampp\htdocs\TravelBookingMVC\model\TravelOffer.php';
 
-        session_start();
-
-        // Autoloading des classes
-        spl_autoload_register(function ($class) {
-            $file_path = 'C:\xampp\htdocs\TravelBookingMVC\model\\' . $class . '.php';
-            if (file_exists($file_path)) {
-                require_once $file_path;
-            }
-        });
-
-        if (isset($_SESSION['offers']) && is_array($_SESSION['offers'])) {
-            $offers = $_SESSION['offers'];
-
+        if (!empty($list)) { // Vérifiez si la liste n'est pas vide
             echo "<table>";
-            echo "<tr><th>Titre</th><th>Destination</th><th>Départ</th><th>Retour</th><th>Prix (€)</th><th>Catégorie</th></tr>";
+            echo "<tr><th>Titre</th><th>Destination</th><th>Départ</th><th>Retour</th><th>Prix (€)</th><th>Catégorie</th><th>Actions</th></tr>";
 
-            foreach ($offers as $offer) {
+            foreach ($list as $offer) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($offer->getTitle()) . "</td>";
-                echo "<td>" . htmlspecialchars($offer->getDestination()) . "</td>";
-                echo "<td>" . htmlspecialchars($offer->getDepartureDate()) . "</td>";
-                echo "<td>" . htmlspecialchars($offer->getReturnDate()) . "</td>";
-                echo "<td>" . htmlspecialchars($offer->getPrice()) . " €</td>";
-                echo "<td>" . htmlspecialchars($offer->getCategory()) . "</td>";
+                echo "<td>" . htmlspecialchars($offer['titre']) . "</td>";
+                echo "<td>" . htmlspecialchars($offer['destination']) . "</td>";
+                echo "<td>" . htmlspecialchars($offer['departureDate']) . "</td>";
+                echo "<td>" . htmlspecialchars($offer['returnDate']) . "</td>";
+                echo "<td>" . htmlspecialchars($offer['price']) . " €</td>";
+                echo "<td>" . htmlspecialchars($offer['category']) . "</td>";
+                echo "<td>";
+                echo "<a href='updateOffer.php?id=" . urlencode($offer['id']) . "' class='btn btn-update'>Modifier</a> ";
+                echo "<a href='deleteOffer.php?id=" . urlencode($offer['id']) . "' class='btn btn-delete'>Supprimer</a>";
+                echo "</td>";
                 echo "</tr>";
             }
 

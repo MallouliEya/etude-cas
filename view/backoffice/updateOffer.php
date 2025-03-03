@@ -3,32 +3,28 @@ require_once('C:\xampp\htdocs\TravelBookingMVC\Controller\TravelOfferController.
 
 $error = "";
 $offer = null;
-
-// Créer une instance du contrôleur
 $offerController = new TravelOfferController();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (
-        isset($_POST["titre"], $_POST["destination"], $_POST["departureDate"], $_POST["returnDate"], $_POST["price"], $_POST["category"], $_POST["disponible"])
-        && !empty($_POST["titre"]) && !empty($_POST["destination"]) && !empty($_POST["departureDate"]) && !empty($_POST["returnDate"]) && !empty($_POST["price"]) && !empty($_POST["category"])
-    ) {
-        $disponible = ($_POST['disponible'] == '1'); // Conversion propre en booléen
-        $offer = new TravelOffer(
-            null,
-            $_POST['titre'],
-            $_POST['destination'],
-            new DateTime($_POST['departureDate']),
-            new DateTime($_POST['returnDate']),
-            (float)$_POST['price'], // Cast en float
-            $disponible,
-            $_POST['category']
-        );
-        $offerController->addOffer($offer);
-        header('Location: offerList.php');
-        exit();
-    } else {
-        $error = "Informations manquantes.";
-    }
+if (
+    isset($_POST["titre"], $_POST["destination"], $_POST["departureDate"], $_POST["returnDate"], $_POST["price"], $_POST["category"])
+    && !empty($_POST["titre"]) && !empty($_POST["destination"]) && !empty($_POST["departureDate"]) && !empty($_POST["returnDate"]) && !empty($_POST["price"]) && !empty($_POST["category"])
+) {
+    $disponible = isset($_POST['disponible']) ? true : false;
+    $offer = new TravelOffer(
+        null,
+        $_POST['titre'],
+        $_POST['destination'],
+        new DateTime($_POST['departureDate']),
+        new DateTime($_POST['returnDate']),
+        (float)$_POST['price'],
+        $disponible,
+        $_POST['category']
+    );
+    $offerController->updateOffer($offer, $_POST['id']);
+    header('Location: offerList.php');
+    exit();
+} else {
+    $error = "Informations manquantes.";
 }
 ?>
 
